@@ -1,0 +1,12 @@
+---
+# tasks file for froxlor
+- include: preseed.yml
+
+- name: lamp
+  apt: pkg={{ item }} state=present
+  with_items:
+    - apache2
+    - libapache2-mod-php5
+    - mysql-server
+    - phpmyadmin
+

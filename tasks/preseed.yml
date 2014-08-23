@@ -1,0 +1,3 @@
+---
+- name: preseed phpmyadmin
+  debconf: name=phpmyadmin question='phpmyadmin/reconfigure-webserver' value='apache2' vtype='multiselect'
