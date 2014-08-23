@@ -1,3 +1,20 @@
 ---
 - name: preseed phpmyadmin
-  debconf: name=phpmyadmin question='phpmyadmin/reconfigure-webserver' value='apache2' vtype='multiselect'
+  debconf: >
+    name=phpmyadmin
+    question=phpmyadmin/{{ item.question }}
+    vtype={{ item.vtype }}
+    value={{ item.value }}
+  with_items:
+    - { question: reconfigure-webserver, vtype: multiselect, value: apache2 }
+    - { question: mysql/admin-pass, vtype: password, value: "{{ mysql_root_password }}" }
+
+- name: preseed mysql
+  debconf: >
+    name=mysql-server-5.5
+    question=mysql-server/{{ item }}
+    vtype=password
+    value={{ mysql_root_password }}
+  with_items:
+    - root_password
+    - root_password_again
