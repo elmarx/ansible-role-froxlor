@@ -39,4 +39,4 @@
     - bind9
     - froxlor
 
-- include: froxlor-config.yml
+- include: froxlor-config.yml tags=froxlor.config
