@@ -11,3 +11,13 @@
     dest=/tmp/install-output.txt
     HEADER_Content-Type=application/x-www-form-urlencoded
     creates=/var/www/froxlor/lib/userdata.inc.php
+
+- name: "setup froxlor cronjob" # executing the cronjob once creates the cron.d file
+  command: /usr/bin/php5 -q /var/www/froxlor/scripts/froxlor_master_cronjob.php
+  args:
+    creates: /etc/cron.d/froxlor
+
+- name: create the customers directory
+  file: >
+    path=/var/customers
+    state=directory
