@@ -1,0 +1,13 @@
+---
+
+- name: prerequisite for froxlor configuration
+  apt: pkg=python-httplib2 state=present
+
+- name: froxlor webconfiguration
+  uri: >
+    url=http://localhost/froxlor/install/install.php
+    method=POST
+    body="mysql_database=froxlor&mysql_unpriv_user=froxlor&mysql_unpriv_pass={{ mysql_froxlor_password }}&mysql_root_user=root&mysql_root_pass={{ mysql_root_password }}&admin_user={{ froxlor_admin_username }}&admin_pass1={{ froxlor_admin_password }}&admin_pass2={{ froxlor_admin_password }}&servername={{ froxlor_servername }}&serverip={{ froxlor_ip }}&webserver=apache2&httpuser=www-data&httpgroup=www-data&check=1&language=german&installstep=1&"
+    dest=/tmp/install-output.txt
+    HEADER_Content-Type=application/x-www-form-urlencoded
+    creates=/var/www/froxlor/lib/userdata.inc.php

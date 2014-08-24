@@ -1,4 +1,8 @@
 ---
+- name: Check if .my.cnf file already exists.
+  stat: "path=/root/.my.cnf"
+  register: mycnf_file
+
 - name: preseed phpmyadmin
   debconf: >
     name=phpmyadmin
@@ -8,6 +12,7 @@
   with_items:
     - { question: reconfigure-webserver, vtype: multiselect, value: apache2 }
     - { question: mysql/admin-pass, vtype: password, value: "{{ mysql_root_password }}" }
+  when: mycnf_file.stat.exists == false
 
 - name: preseed mysql
   debconf: >
@@ -18,3 +23,4 @@
   with_items:
     - root_password
     - root_password_again
+  when: mycnf_file.stat.exists == false

@@ -1,0 +1,10 @@
+---
+- name: add froxlor key
+  apt_key: >
+    id=FD88018B6F2D5390D051343FF6B4A8704F9E9BBC
+    keyserver=pool.sks-keyservers.net
+    state=present
+
+- name: add repository
+  apt_repository: >
+    repo='deb http://debian.froxlor.org wheezy main'

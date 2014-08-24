@@ -1,12 +1,42 @@
 ---
 # tasks file for froxlor
 - include: preseed.yml
+- include: froxlor-repo.yml
 
 - name: lamp
-  apt: pkg={{ item }} state=present
+  apt: pkg={{ item }} install_recommends=no state=present
   with_items:
     - apache2
     - libapache2-mod-php5
     - mysql-server
     - phpmyadmin
+    - php5-gd
+    - php5-imap
+    - php5-curl
 
+- name: setup .my.conf
+  template: src=my.cnf dest=/root/.my.cnf owner=root mode=0600
+
+- name: MTA and MDA
+  apt: pkg={{ item }} install_recommends=no state=present
+  with_items:
+    - postfix
+    - postfix-mysql
+    - ssl-cert
+    - dovecot-imapd
+    - dovecot-pop3d
+    - dovecot-mysql
+
+- name: FTP
+  apt: pkg={{ item }} install_recommends=no state=present
+  with_items:
+    - openbsd-inetd
+    - proftpd-mod-mysql
+
+- name: install froxlor
+  apt: pkg={{ item }} install_recommends=no state=present
+  with_items:
+    - bind9
+    - froxlor
+
+- include: froxlor-config.yml
