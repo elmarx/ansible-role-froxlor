@@ -24,3 +24,10 @@
     - root_password
     - root_password_again
   when: mycnf_file.stat.exists == false
+
+- name: preseed proftpd
+  debconf: >
+    name=proftpd-basic
+    question=shared/proftpd/inetd_or_standalone
+    vtype=select
+    value="from inetd"
