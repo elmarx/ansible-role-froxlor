@@ -1,0 +1,25 @@
+---
+- name: dovecot static configuration
+  file: >
+    src=dovecot/{{ item }}
+    dest=/etc/dovecot/{{ item }}
+    owner=root
+    group=root
+  with_items:
+    - conf.d/10-auth.conf
+    - conf.d/10-mail.conf
+    - conf.d/10-master.conf
+    - conf.d/15-lda.conf
+    - conf.d/20-imap.conf
+    - conf.d/20-pop3.conf
+    - dovecot.conf
+  notify: restart dovecot
+
+- name: dovecot sql configuration
+  template: >
+    src=dovecot/dovecot-sql.conf.ext
+    dest=/etc/dovecot/dovecot-sql.conf.ext
+    mode=0640
+    owner=root
+    group=dovecot
+  notify: restart dovecot
