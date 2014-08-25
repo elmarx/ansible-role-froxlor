@@ -1,7 +1,7 @@
 ---
 # tasks file for froxlor
 - include: preseed.yml
-- include: froxlor-repo.yml
+- include: froxlor.repo.yml
 
 - name: lamp
   apt: pkg={{ item }} install_recommends=no state=present
@@ -39,4 +39,4 @@
     - bind9
     - froxlor
 
-- include: froxlor-config.yml tags=froxlor.config
+- include: froxlor.config.yml tags=froxlor.config
