@@ -1,0 +1,19 @@
+---
+- name: setup proftpd configuration
+  template: >
+    src=proftpd/{{ item }}
+    dest=/etc/proftpd/{{ item }}
+    owner=root
+    group=root
+  with_items:
+    - sql.conf
+    - proftpd.conf
+
+- name: proftpd static configuration
+  copy: >
+    src=proftpd/modules.conf
+    dest=/etc/proftpd/modules.conf
+    owner=root
+    group=root
+
+# no need to restart here, as proftpd is started from inetd
