@@ -1,5 +1,4 @@
 ---
-
 - name: prerequisite for froxlor configuration
   apt: pkg=python-httplib2 state=present
 
