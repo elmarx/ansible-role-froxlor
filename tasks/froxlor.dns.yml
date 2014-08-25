@@ -1,0 +1,20 @@
+---
+- name: include froxlor dns configuration
+  lineinfile: >
+    dest=/etc/bind/named.conf.local
+    line='include "/etc/bind/froxlor_bind.conf";'
+  notify: restart bind
+
+- name: Check if froxlor_bind.conf already exists
+  stat: path=/etc/bind/froxlor_bind.conf
+  register: froxlor_bind
+
+- name: empty froxlor bind configuration
+  file: >
+    path=/etc/bind/froxlor_bind.conf
+    state=touch
+    owner=root
+    group=bind
+    mode=0644
+  when: froxlor_bind.stat.exists == false
+  notify: restart bind
