@@ -16,7 +16,3 @@
   args:
     creates: /etc/cron.d/froxlor
 
-- name: create the customers directory
-  file: >
-    path=/var/customers
-    state=directory

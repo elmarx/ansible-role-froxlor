@@ -1,0 +1,20 @@
+---
+- name: create apache's webs and logs dir
+  file: >
+    path=/var/customers/{{ item }}
+    state=directory
+  with_items:
+    - webs
+    - logs
+
+- name: create apache tmp directory
+  file: >
+    path=/var/customers/tmp
+    state=directory
+    mode=1777
+
+- name: logrotation for apache
+  copy: >
+    src=http/logrotate
+    dest=/etc/logrotate.d/froxlor
+    mode=644
