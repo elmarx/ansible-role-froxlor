@@ -11,7 +11,7 @@
 
 - name: restart postfix
   service: >
-    name=postix
+    name=postfix
     state=restarted
 
 - name: newaliases

@@ -50,3 +50,8 @@
     - mysql-virtual_sender_permissions.cf
   notify: restart postfix
 
+- name: add alias for root
+  lineinfile: >
+    dest=/etc/aliases
+    line='root: {{admin_email}}'
+    regexp='^root:'
