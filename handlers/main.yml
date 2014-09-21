@@ -9,3 +9,11 @@
     name=dovecot
     state=restarted
 
+- name: restart postfix
+  service: >
+    name=postix
+    state=restarted
+
+- name: newaliases
+  command: newaliases
+

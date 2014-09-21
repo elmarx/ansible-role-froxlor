@@ -6,3 +6,4 @@ froxlor_admin_username: admin
 froxlor_admin_password: "{{ lookup('password', 'credentials/froxlor.admin.pw') }}"
 froxlor_servername: "{{ ansible_fqdn }}"
 froxlor_ip: "{{ ansible_default_ipv4.address }}"
+admin_email: "root@{{froxlor_servername}}"

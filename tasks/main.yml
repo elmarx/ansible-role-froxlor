@@ -43,5 +43,5 @@
 - include: froxlor.http.yml tags=froxlor.http
 - include: froxlor.ftp.yml tags=froxlor.ftp
 - include: froxlor.dns.yml tags=froxlor.dns
-- include: froxlor.imap_pop.yml tags=froxlor.imap_pop
 - include: froxlor.smtp.yml tags=froxlor.smtp
+- include: froxlor.imap_pop.yml tags=froxlor.imap_pop

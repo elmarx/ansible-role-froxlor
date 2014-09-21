@@ -1,0 +1,52 @@
+---
+- name: add vmail group
+  group: >
+    name=vmail
+    state=present
+    system=yes
+
+- name: add a vmail user
+  user: >
+    name=vmail
+    group=vmail
+    home=/var/customers/vmail
+    createhome=yes
+    system=yes
+    state=present
+
+- name: register vmail group id
+  command: id -g vmail
+  register: vmail_gid
+  changed_when: False
+
+- name: register vmail user id
+  command: id -u vmail
+  register: vmail_uid
+  changed_when: False
+  
+- name: postfix configuration
+  template: >
+    src=postfix/{{item}}
+    dest=/etc/postfix/{{item}}
+    mode=0644
+    owner=root
+    group=root
+  with_items:
+    - main.cf
+    - master.cf
+  notify: restart postfix
+
+- name: postfix mysql configuration
+  template: >
+    src=postfix/{{item}}
+    dest=/etc/postfix/{{item}}
+    mode=0640
+    owner=root
+    group=postfix
+  with_items:
+    - mysql-virtual_alias_maps.cf
+    - mysql-virtual_mailbox_domains.cf
+    - mysql-virtual_mailbox_maps.cf
+    - mysql-virtual_sender_permissions.cf
+  notify: restart postfix
+
