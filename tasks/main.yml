@@ -26,7 +26,6 @@
     - dovecot-imapd
     - dovecot-pop3d
     - dovecot-mysql
-    - opendkim
 
 - name: FTP
   apt: pkg={{ item }} install_recommends=no state=present

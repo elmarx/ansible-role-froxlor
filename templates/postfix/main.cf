@@ -736,9 +736,3 @@ virtual_mailbox_limit = 0
 #smtpd_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
 #smtpd_tls_loglevel = 1
 #smtpd_tls_received_header = yes
-
-# settings for opendkim
-milter_default_action = accept
-milter_protocol = 6
-smtpd_milters = inet:localhost:8891
-non_smtpd_milters = inet:localhost:8891

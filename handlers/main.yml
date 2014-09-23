@@ -14,11 +14,6 @@
     name=postfix
     state=restarted
 
-- name: restart opendkim
-  service: >
-    name=opendkim
-    state=restarted
-
 - name: newaliases
   command: newaliases
 

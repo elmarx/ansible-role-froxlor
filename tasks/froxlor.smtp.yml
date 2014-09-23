@@ -55,19 +55,3 @@
     dest=/etc/aliases
     line='root: {{admin_email}}'
     regexp='^root:'
-  notify: newaliases
-
-- name: create opendkim directory
-  file: path=/etc/postfix/opendkim state=directory
-
-- name: configure opendkim
-  template: >
-    src=opendkim.conf
-    dest=/etc/opendkim.conf
-    owner=root
-    group=root
-    mode=0644
-  notify: 
-    - restart postfix 
-    - restart opendkim
-
