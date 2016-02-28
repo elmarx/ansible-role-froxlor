@@ -7,4 +7,4 @@
 
 - name: add repository
   apt_repository: >
-    repo='deb http://debian.froxlor.org wheezy main'
+    repo='deb http://debian.froxlor.org {{ ansible_distribution_release }} main'
